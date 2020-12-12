@@ -5,14 +5,22 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ProblemaB {
 
 	public static final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out, StandardCharsets.UTF_8));
 	public static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
 	public static int costomin = 10000;
+	
+	public static Integer[] strToIntArr(String s) {
+		List<Integer> list = new ArrayList<>();
+		Arrays.asList(s.split(" ")).forEach(s1 -> list.add(Integer.parseInt(s1)));
+		return list.toArray(new Integer[0]);
+	}
 
-	public static ArrayList<ArrayList<Integer>> permutacionesArreglo(int[] pArreglo) {
+	public static ArrayList<ArrayList<Integer>> permutacionesArreglo(Integer[] pArreglo) {
 		ArrayList<ArrayList<Integer>> resultado = new ArrayList<ArrayList<Integer>>();
 		resultado.add(new ArrayList<Integer>());
 		for (int i = 0; i < pArreglo.length; i++) {
@@ -36,7 +44,7 @@ public class ProblemaB {
 		return resultado;
 	}
 
-	public static void solucion(int pN, int pLongitud, int[] pArreglo)
+	public static void solucion(int pN, int pLongitud, Integer[] pArreglo)
 	{
 		ArrayList<ArrayList<Integer>> permutaciones = permutacionesArreglo(pArreglo);
 		for(ArrayList<Integer> r: permutaciones)
@@ -108,27 +116,18 @@ public class ProblemaB {
 	}
 
 	public static void main(String[] args) throws IOException {
-		// Read an integer N and then an integer array:
-		//int n = Integer.parseInt(br.readLine());
-		//Integer[] arr = strToIntArr(br.readLine());
+		int n = Integer.parseInt(br.readLine());
+		Integer[] secuencia = strToIntArr(br.readLine());
 
-		// Example of doing an output of n in a new line:
-		//bw.write(n + "\n");
-		//bw.flush();
+		br.close();
 
-		//bw.close();
-		//br.close();
-
-
-		int[]secuenciaPrueba = {3,8,10};
+       
 		ArrayList<Integer> aux = new ArrayList<Integer>();
-		//solucion(10000,20,secuenciaPrueba);
-		//System.out.println(costomin);
-		solucion(10000,20,secuenciaPrueba);
+		solucion(10000,n,secuencia);
 
-		//costoIzqDer(100, 20, secuenciaPrueba);
-		//costoDerIzq(100, 20, secuenciaPrueba);
-		System.out.println("Costo mínimo " + costomin);   
+		bw.write("Costo minimo " + costomin);   
+		bw.flush();
+		bw.close();
 	}
 
 
