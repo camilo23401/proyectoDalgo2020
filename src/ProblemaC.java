@@ -58,17 +58,52 @@ public class ProblemaC {
 
 	public static void main(String[] args) throws IOException {
 
-		Integer[] arr1 = strToIntArr(br.readLine());
-		Integer[] camino = strToIntArr(br.readLine());
-		int longitud = arr1[0];
-		int longitudTablon = arr1[1];
-		tamano = longitud;
-		revisoDer = new boolean[tamano];
-		revisoIzq = new boolean[tamano];
+		ArrayList<Integer[]> aux = new ArrayList<Integer[]>();
+		ArrayList<Integer[]> secuencias = new ArrayList<Integer[]>();
+		
+		String linea = br.readLine();
+		while(!linea.equals("0 0"))
+		{
+			Integer[] info = strToIntArr(linea);
+			aux.add(info);
+			linea = br.readLine();
+			Integer[] secuencia = strToIntArr(linea);
+			secuencias.add(secuencia);
+			linea = br.readLine();
+		}
 		br.close();
 
-		solucion(longitud,longitudTablon,camino,0,0);
-		if(costos.size()>0)
+		for(int i = 0; i<aux.size();i++)
+		{
+			int longitud = aux.get(i)[0];
+			int longitudTablon = aux.get(i)[1];
+			tamano = longitud;
+			revisoDer = new boolean[tamano];
+			revisoIzq = new boolean[tamano];
+			Integer[] camino = secuencias.get(i);
+			solucion(longitud,longitudTablon,camino,0,0);
+			if(costos.size()>0)
+			{
+				bw.write(costos.get(0)+"\n");
+				bw.flush();
+			}
+			else
+			{
+				bw.write(-1+"\n");
+				bw.flush();
+			}
+			costos = new ArrayList<Integer>();
+		}
+		bw.close();
+		//int longitud = arr1[0];
+		//int longitudTablon = arr1[1];
+		//tamano = longitud;
+		//revisoDer = new boolean[tamano];
+		//revisoIzq = new boolean[tamano];
+		//br.close();
+
+		//solucion(longitud,longitudTablon,camino,0,0);
+		/**if(costos.size()>0)
 		{
 			bw.write(costos.get(0)+"");
 			bw.flush();
@@ -78,6 +113,6 @@ public class ProblemaC {
 			bw.write(-1+"");
 			bw.flush();
 		}
-		bw.close();
+		bw.close();*/
 	}
 }

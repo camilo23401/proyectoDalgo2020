@@ -13,7 +13,7 @@ public class ProblemaB {
 	public static final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out, StandardCharsets.UTF_8));
 	public static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
 	public static int costomin = 10000;
-	
+
 	public static Integer[] strToIntArr(String s) {
 		List<Integer> list = new ArrayList<>();
 		Arrays.asList(s.split(" ")).forEach(s1 -> list.add(Integer.parseInt(s1)));
@@ -44,8 +44,9 @@ public class ProblemaB {
 		return resultado;
 	}
 
-	public static void solucion(int pN, int pLongitud, Integer[] pArreglo)
+	public static int solucion(int pN, int pLongitud, Integer[] pArreglo)
 	{
+		int costomin = 10000;
 		ArrayList<ArrayList<Integer>> permutaciones = permutacionesArreglo(pArreglo);
 		for(ArrayList<Integer> r: permutaciones)
 		{
@@ -55,6 +56,7 @@ public class ProblemaB {
 				costomin = costperm;	
 			}
 		}
+		return costomin;
 	}
 
 	public static int revisarCostoCorte(ArrayList<Integer> pR, int pLongitud)
@@ -80,10 +82,10 @@ public class ProblemaB {
 		{
 			costo = revisarCostoCorteDesordenado(pR, pLongitud);
 		}
-		System.out.println(pR + "-" + costo);
+		//System.out.println(pR + "-" + costo);
 		return costo;
 	}
-	
+
 	public static int revisarCostoCorteDesordenado(ArrayList<Integer> pR, int pLongitud)
 	{
 		int costo = 0;
@@ -96,37 +98,49 @@ public class ProblemaB {
 		}
 		return costo;
 	}
-	
+
 	public static boolean estaOrdenadoAsc(ArrayList<Integer> datos){
-	    for(int i = 1; i < datos.size(); i++){
-	        if(datos.get(i-1) > datos.get(i)){
-	            return false;
-	        }
-	    }
-	    return true;
+		for(int i = 1; i < datos.size(); i++){
+			if(datos.get(i-1) > datos.get(i)){
+				return false;
+			}
+		}
+		return true;
 	}
-	
+
 	public static boolean estaOrdenadoDesc(ArrayList<Integer> datos){
-	    for(int i = 1; i < datos.size(); i++){
-	        if(datos.get(i-1) < datos.get(i)){
-	            return false;
-	        }
-	    }
-	    return true;
+		for(int i = 1; i < datos.size(); i++){
+			if(datos.get(i-1) < datos.get(i)){
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public static void main(String[] args) throws IOException {
-		int n = Integer.parseInt(br.readLine());
-		Integer[] secuencia = strToIntArr(br.readLine());
 
+		ArrayList<Integer> ns = new ArrayList<Integer>();
+		ArrayList<Integer[]> secuencias = new ArrayList<Integer[]>();
+		String linea = br.readLine();
+		while(!linea.equals("0"))
+		{
+			int n = Integer.parseInt(linea);
+			ns.add(n);
+			linea = br.readLine();
+			Integer[] secuencia = strToIntArr(linea);
+			secuencias.add(secuencia);
+			linea = br.readLine();
+		}
 		br.close();
 
-       
+		for(int i=0;i<ns.size();i++)
+		{
+			bw.write(solucion(10000,ns.get(i),secuencias.get(i))+"\n");
+			bw.flush();
+		}
 		ArrayList<Integer> aux = new ArrayList<Integer>();
-		solucion(10000,n,secuencia);
+		//solucion(10000,n,secuencia);
 
-		bw.write("Costo minimo " + costomin);   
-		bw.flush();
 		bw.close();
 	}
 
