@@ -47,74 +47,42 @@ public class ProblemaB {
 	public static int solucion(int pN, int pLongitud, Integer[] pArreglo)
 	{
 		int costomin = 10000;
+		boolean[] cortesHechos = new boolean[pArreglo.length];
 		ArrayList<ArrayList<Integer>> permutaciones = permutacionesArreglo(pArreglo);
 		for(ArrayList<Integer> r: permutaciones)
 		{
-			int	costperm = revisarCostoCorte(r, pLongitud);
+			int	costperm = revisarCostoCorte(pLongitud,r);
 			if(costperm<costomin)
 			{
 				costomin = costperm;	
 			}
 		}
+
 		return costomin;
 	}
 
-	public static int revisarCostoCorte(ArrayList<Integer> pR, int pLongitud)
+	public static int revisarCostoCorte(int longitud, ArrayList<Integer> cortes)
 	{
-		int costo = 0;
-		if(estaOrdenadoAsc(pR)||estaOrdenadoDesc(pR))
-		{
-			for(int i =0; i<pR.size();i++)
-			{
-				if(i==0)
-				{
-					costo+=pLongitud;
-					pLongitud -= pR.get(i);
-				}
-				else
-				{
-					costo+=pLongitud;
-					pLongitud-=Math.abs(pR.get(i)-pR.get(i-1));
-				}
-			}
+		if (cortes.size() == 0)
+			return 0;
+
+		int costo = longitud;
+		int longIzq = cortes.get(0);
+		int longDer = longitud - longIzq;
+
+		ArrayList<Integer> cortesIzq = new ArrayList<Integer>();
+		ArrayList<Integer> cortesDer = new ArrayList<Integer>();
+		for (int i=1; i<cortes.size(); i++) {
+			Integer cut = cortes.get(i);
+			if (cut < longIzq)
+				cortesIzq.add(cut);
+			else 
+				cortesDer.add(cut-longIzq);
 		}
-		else
-		{
-			costo = revisarCostoCorteDesordenado(pR, pLongitud);
-		}
-		//System.out.println(pR + "-" + costo);
+
+		costo += revisarCostoCorte(longIzq, cortesIzq) + revisarCostoCorte(longDer, cortesDer);
 		return costo;
-	}
 
-	public static int revisarCostoCorteDesordenado(ArrayList<Integer> pR, int pLongitud)
-	{
-		int costo = 0;
-		int vmin = 0;
-		int vmax = pLongitud;
-		for(int i =0; i<pR.size();i++)
-		{
-			costo += pLongitud;
-			pLongitud-=pR.get(i);
-		}
-		return costo;
-	}
-
-	public static boolean estaOrdenadoAsc(ArrayList<Integer> datos){
-		for(int i = 1; i < datos.size(); i++){
-			if(datos.get(i-1) > datos.get(i)){
-				return false;
-			}
-		}
-		return true;
-	}
-
-	public static boolean estaOrdenadoDesc(ArrayList<Integer> datos){
-		for(int i = 1; i < datos.size(); i++){
-			if(datos.get(i-1) < datos.get(i)){
-				return false;
-			}
-		}
-		return true;
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -138,9 +106,6 @@ public class ProblemaB {
 			bw.write(solucion(10000,ns.get(i),secuencias.get(i))+"\n");
 			bw.flush();
 		}
-		ArrayList<Integer> aux = new ArrayList<Integer>();
-		//solucion(10000,n,secuencia);
-
 		bw.close();
 	}
 
