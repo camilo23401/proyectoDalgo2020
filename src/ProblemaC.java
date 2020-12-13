@@ -53,7 +53,6 @@ public class ProblemaC {
 				solucion(pLongitudCamino, pLongitudTablon, pCamino, pNumPasos+1,i+pCamino[i]);
 			}
 		}
-
 	}
 
 	public static void main(String[] args) throws IOException {
