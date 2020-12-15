@@ -12,7 +12,7 @@ public class ProblemaB {
 
 	public static final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out, StandardCharsets.UTF_8));
 	public static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
-	public static int costomin = 10000;
+	public static int costomin;
 
 	public static Integer[] strToIntArr(String s) {
 		List<Integer> list = new ArrayList<>();
@@ -46,8 +46,7 @@ public class ProblemaB {
 
 	public static int solucion(int pN, int pLongitud, Integer[] pArreglo)
 	{
-		int costomin = 10000;
-		boolean[] cortesHechos = new boolean[pArreglo.length];
+		int costomin = 2147483647;
 		ArrayList<ArrayList<Integer>> permutaciones = permutacionesArreglo(pArreglo);
 		for(ArrayList<Integer> r: permutaciones)
 		{
