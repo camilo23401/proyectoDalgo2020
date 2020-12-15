@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Problema B
+ * @authors Nicolás Ortega 201814515 & Camilo García 201821149
+ * DALGO 2020-20
+ */
 public class ProblemaB {
 
 	public static final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out, StandardCharsets.UTF_8));
