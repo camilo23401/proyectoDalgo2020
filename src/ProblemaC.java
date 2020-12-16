@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Problema C 
- * @authors Nicolás Ortega 201814515 & Camilo García 201821149
+ * Problema C
+ * @authors Nicolas Ortega 201814515 & Camilo Garcia 201821149
  * DALGO 2020-20
  */
 public class ProblemaC {
@@ -31,7 +31,7 @@ public class ProblemaC {
 	public static void solucion(int pLongitudCamino, int pLongitudTablon, Integer[] pCamino, int pNumPasos, int pInicio)
 	{
 		int i = pInicio;
-		if (pCamino[i]==-1) //Pierde o debe usar tablón
+		if (pCamino[i]==-1) //Pierde o debe usar tablon
 		{
 			if(pLongitudTablon>=1)
 			{
@@ -48,12 +48,12 @@ public class ProblemaC {
 		}
 		if(0<pCamino[i] && pCamino[i]<pLongitudCamino)
 		{
-			if(i>pCamino[i]&&!revisoIzq[i]) //Puede para atrás
+			if(i>pCamino[i]&&!revisoIzq[i]) //Puede para atras
 			{
 				revisoIzq[i]=true;
 				solucion(pLongitudCamino, pLongitudTablon, pCamino, pNumPasos+1,i-pCamino[i]);
 			}
-			if(i+pCamino[i]<=pLongitudCamino&&!revisoDer[i]) //Puede hacía delante
+			if(i+pCamino[i]<=pLongitudCamino&&!revisoDer[i]) //Puede hacia delante
 			{
 				revisoDer[i]=true;
 				solucion(pLongitudCamino, pLongitudTablon, pCamino, pNumPasos+1,i+pCamino[i]);
@@ -91,12 +91,12 @@ public class ProblemaC {
 			if(menosPasos!=2147483647)
 			{
 				bw.write(menosPasos+"\n");
-				bw.flush();	
+				bw.flush();
 			}
 			else
 			{
 				bw.write("-1"+"\n");
-				bw.flush();	
+				bw.flush();
 			}
 		}
 		bw.close();

@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Problema B
- * @authors Nicolás Ortega 201814515 & Camilo García 201821149
+ * @authors Nicolas Ortega 201814515 & Camilo Garcia 201821149
  * DALGO 2020-20
  */
 public class ProblemaB {
@@ -58,7 +58,7 @@ public class ProblemaB {
 			int	costperm = revisarCostoCorte(pLongitud,r);
 			if(costperm<costomin)
 			{
-				costomin = costperm;	
+				costomin = costperm;
 			}
 		}
 
@@ -80,7 +80,7 @@ public class ProblemaB {
 			Integer cut = cortes.get(i);
 			if (cut < longIzq)
 				cortesIzq.add(cut);
-			else 
+			else
 				cortesDer.add(cut-longIzq);
 		}
 
