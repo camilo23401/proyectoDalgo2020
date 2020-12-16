@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Problema A 
- * @authors Nicolás Ortega 201814515 & Camilo García 201821149
+ * Problema A
+ * @authors Nicolï¿½s Ortega 201814515 & Camilo Garcï¿½a 201821149
  * DALGO 2020-20
  */
 public class ProblemaA {
@@ -31,13 +31,13 @@ public class ProblemaA {
 		for (int x=0; x<mat[0].length; x++) {
 			if (x != fila) {
 				for (int y=0; y<mat[0].length; y++) {
-					if (y != col) {		
+					if (y != col) {
 						resp[i][j++] = mat[x][y];
 						if (j == n) {
 							j = 0;
 							i++;
-						}			
-					}	
+						}
+					}
 				}
 			}
 		}
@@ -48,12 +48,12 @@ public class ProblemaA {
 	public static Integer determinante(Integer mat[][], int n) {
 
 		int resp = 0, signo = 1;
-		if (n == 1) 
+		if (n == 1)
 			return mat[0][0];
 
-
+		Integer[][] cof;
 		for (int col=0; col<n; col++) {
-			Integer[][] cof = submatriz(mat, 0, col, n-1);
+			cof = submatriz(mat, 0, col, n-1);
 			resp += mat[0][col]*determinante(cof,n-1)*signo;
 			signo = -signo;
 		}
@@ -61,9 +61,7 @@ public class ProblemaA {
 		return resp;
 	}
 
-
 	public static Integer[][] adjunta (Integer[][] mat, int n, int p){
-
 		Integer[][] resp = new Integer[n][n], cof;
 		int signo = 1;
 
@@ -78,41 +76,34 @@ public class ProblemaA {
 		return resp;
 	}
 
-	public static void imprimirMatriz(int[][] mat) throws IOException{
-		for (int i = 0; i < mat[0].length; i++) 
-		{ 
-			for (int j = 0; j < mat[0].length; j++) 
+	public static void imprimirMatriz(Integer[][] mat) throws IOException{
+		for (int i = 0; i < mat[0].length; i++)
+		{
+			for (int j = 0; j < mat[0].length; j++)
 				bw.write(mat[i][j]+ " ");
-			bw.write("\n"); 
-		} 
+			bw.write("\n");
+		}
 		bw.flush();
 	}
 
-	/* Template code ends here. */
-
-	public static int[][] inversa(Integer[][] mat, int n, int p){
+	public static Integer[][] inversa(Integer[][] mat, int n, int p){
 		int d = modulo(determinante(mat, n), p);
 		if (d == 0) {
-			return null;		
+			return null;
 		}
 
 		Integer[][] adj = adjunta(mat, n, p);
-		int[][] inversa = new int[n][n];
-
-		//imprimirMatriz(adj);
 
 		int detInv = d != 1 ? (1+p)/d : d;
 		for (int i=0; i<n; i++) {
 			for (int j=0; j<n; j++) {
-				inversa[i][j] = adj[i][j]*detInv;
+				adj[i][j] = adj[i][j]*detInv;
 			}
 		}
-		return inversa;
+		return adj;
 	}
 
 	public static void main(String[] args) throws IOException {
-		// Read an integer N and then an integer array:
-
 		ArrayList<Integer[][]> matrices = new ArrayList<Integer[][]>();
 		ArrayList<Integer> ns = new ArrayList<Integer>();
 		ArrayList<Integer> ps = new ArrayList<Integer>();
@@ -139,20 +130,16 @@ public class ProblemaA {
 			int n = ns.get(i);
 			int p = ps.get(i);
 
-			int[][] inversa = inversa(mat, n, p);
+			Integer[][] inversa = inversa(mat, n, p);
 
 			if (inversa != null)
 				imprimirMatriz(inversa);
-			else 
+			else
 				bw.write("X\n");
 			bw.write("*\n");
 			bw.flush();
-
-
 		}
-
 		br.close();
 	}
 
 }
-
